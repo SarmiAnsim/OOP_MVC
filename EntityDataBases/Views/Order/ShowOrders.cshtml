@@ -1,0 +1,71 @@
+﻿@model IEnumerable<EntityDataBases.Storage.Entity.Order>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowOrders</title>
+    <style type="text/css" id="main">
+
+        input[type=search] {
+            width: 25%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <table border="1">
+            @using (Html.BeginForm("Search", "Order", "Post"))
+            {
+                <caption>
+                    <h1><strong>Заказы</strong></h1>
+                    Поиск по заказчику <input class="col-25" type="search" name="ClientSearch" id="ClientSearch" value="@ViewBag.ClientSearch" width="300" />
+                    Поиск по складу <input class="col-25" type="search" name="StorageSearch" id="StorageSearch" value="@ViewBag.StorageSearch" width="300" />
+                    <input type="submit" value="Искать" />
+                </caption>
+            }
+            <tr>
+                <th>Номер заказа:</th>
+                <th>Стоимсоть заказа:</th>
+                <th>Дата заказа:</th>
+                <th>Заказчик:</th>
+                <th>Склад:</th>
+                <th>Адресс склада:</th>
+                <th colspan="2"></th>
+            </tr>
+            @foreach (var item in Model.Where(g => (g.StorageNumber.ToString() == ViewBag.StorageSearch || ViewBag.StorageSearch == "") && (g.Client == ViewBag.ClientSearch || ViewBag.ClientSearch == "")))
+            {
+                <tr>
+                    <td align="center">
+                        <a href="/Order/ShowOrder/@item.Id">
+                            <strong>@item.OrderNumber</strong>
+                        </a>
+                    </td>
+                    <td>@item.Cost</td>
+                    <td>@item.OrderTime</td>
+                    <td>@item.Client</td>
+                    <td>@item.StorageNumber</td>
+                    <td>@item.StorageAddress</td>
+                    <td width="155px"><a href="/Order/UpdateOrder/@item.Id">Редактировать</a></td>
+                    <td width="95px" ><a href="/Order/Delete/@item.Id">Удалить</a></td>
+                </tr>
+            }
+        </table>
+        <br /><br />
+        @using (Html.BeginForm("AddOrder", "Order"))
+        {
+            <div>
+                <input type="submit" value="Добавить новый заказ" />
+            </div>
+        }
+    </div>
+</body>
+</html>

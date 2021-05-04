@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+
+        html {
+            background: Gainsboro;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        input[type=text], input[type=datetime], input[type=number], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+
+        input[type=submit] {
+            background-color: RoyalBlue;
+            color: Gainsboro;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+            overflow: hidden;
+        }
+
+        input[type=submit]:hover {
+          background-color: Blue;
+        }
+
+        .container {
+          border-radius: 5px;
+          background-color: #f2f2f2;
+          padding: 20px;
+        }
+
+        .col-25 {
+          float: left;
+          width: 25%;
+          margin-top: 6px;
+        }
+
+        .col-75 {
+          float: left;
+          width: 75%;
+          margin-top: 6px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+
+        footer {
+            text-align: center;
+            position: fixed; /* Фиксированное положение */
+            left: 0;
+            bottom: 0; /* Левый нижний угол */
+            padding: 10px; /* Поля вокруг текста */
+            background: DodgerBlue; /* Цвет фона */
+            color: Gainsboro; /* Цвет текста */
+            width: 100%; /* Ширина слоя */
+        }
+    </style>
+</head>
+<body>
+    <div class="container body-content">
+        @RenderBody()
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+﻿@model EntityDataBases.Managers.Parts.CreateOrUpdatePartRequest
+@{
+    Layout = "~/Views/Shared/AddOrUpdate.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddPart</title>
+</head>
+<body>
+    @using (Html.BeginForm("Create", "Part", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="col-25">
+                <label>Категория: </label>
+            </div>
+            <div class="col-75">
+                <select required name="CategoryId">
+                    @foreach (var item in ViewBag.CategorysParts)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Модель автомобиля: </label>
+            </div>
+            <div class="col-75">
+                <select required name="CarModelId">
+                    @foreach (var item in ViewBag.CarsModels)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Деталь: </label>
+            </div>
+            <div class="col-75">
+                <input type="text" required id="Name" name="Name" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Стоимость: </label>
+            </div>
+            <div class="col-75">
+                <input type="number" required min="0" id="Cost" name="Cost" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Описание детали: </label>
+            </div>
+            <div class="col-75">
+                <textarea id="Description" required name="Description" cols="40" rows="3"></textarea>
+            </div>
+        </div><br />
+        <div class="row">
+            <input type="submit" value="Добавить деталь" />
+
+        </div><br />
+    }
+    @using (Html.BeginForm("ShowParts", "Part", FormMethod.Get))
+    {
+        <div class="row">
+            <input type="submit" value="Отмена" />
+        </div>
+    }
+</body>
+</html>

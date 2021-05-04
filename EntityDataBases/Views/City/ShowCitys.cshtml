@@ -1,0 +1,43 @@
+﻿@model IEnumerable<EntityDataBases.Storage.Entity.City>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowCitys</title>
+    <style type="text/css" id="main">
+    </style>
+</head>
+<body>
+    <div>
+        <table border="1">
+            <caption><h1><strong>Города</strong></h1></caption>
+            <tr>
+                <th>Город:</th>
+                <th>Количество складов:</th>
+                <th colspan="2"></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td align="center"><strong>@item.Name</strong></td>
+                    <td>@item.NumberOfStorages</td>
+                    <td width="155px"><a href="/City/UpdateCity/@item.Id">Редактировать</a></td>
+                    <td width="95px"><a href="/City/Delete/@item.Id">Удалить</a></td>
+                </tr>
+            }
+        </table>
+        <br /><br />
+        @using (Html.BeginForm("AddCity", "City"))
+        {
+            <div>
+                <input type="submit" value="Добавить новый город" />
+            </div>
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+﻿@model EntityDataBases.Managers.CarsModels.CreateOrUpdateCarModelRequest
+@{
+    Layout = "~/Views/Shared/AddOrUpdate.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddCarModel</title>
+</head>
+<body>
+    @using (Html.BeginForm("Create", "CarModel", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="col-25">
+                <label>Модель автомобиля: </label>
+            </div>
+            <div class="col-75">
+                <input type="text" required id="Name" name="Name" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Год выпуска: </label>
+            </div>
+            <div class="col-75">
+                <input type="number" required id="Year" name="Year" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Производитель: </label>
+            </div>
+            <div class="col-75">
+                <select required name="ManufacturerId">
+                    @foreach (var item in ViewBag.Manufacturers)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            </div>
+        </div><br />
+        <div class="row">
+            <input type="submit" value="Добавить модель" />
+        </div><br />
+    }
+    @using (Html.BeginForm("ShowCarsModels", "CarModel", FormMethod.Get))
+    {
+        <div class="row">
+            <input type="submit" value="Отмена" />
+        </div>
+    }
+</body>
+</html>

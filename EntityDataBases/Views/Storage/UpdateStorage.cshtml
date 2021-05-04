@@ -1,0 +1,59 @@
+﻿@model EntityDataBases.Storage.Entity.Storage
+@{
+    Layout = "~/Views/Shared/AddOrUpdate.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UpdateStorage</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Update", "Storage", FormMethod.Post))
+        {
+            <input id="StorageId" name="StorageId" type="hidden" value="@Model.Id" />
+            <div class="row">
+                <div class="col-25">
+                    <label>Номер склада: </label>
+                </div>
+                <div class="col-75">
+                    <input type="text" required id="StorageNumber" name="StorageNumber" value="@Model.StorageNumber" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label>Адрес: </label>
+                </div>
+                <div class="col-75">
+                    <input type="text" required id="Address" name="Address" value="@Model.Address" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label>Город: </label>
+                </div>
+                <div class="col-75">
+                    <select required name="CityId">
+                        @foreach (var item in ViewBag.Citys)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </select><br /><br />
+                </div>
+            </div><br />
+            <div class="row">
+                <input type="submit" value="Редактировать склад" />
+            </div><br />
+        }
+        @using (Html.BeginForm("ShowStorages", "Storage", FormMethod.Get))
+        {
+            <div class="row">
+                <input type="submit" value="Отмена" />
+            </div>
+        }
+    </div>
+</body>
+</html>

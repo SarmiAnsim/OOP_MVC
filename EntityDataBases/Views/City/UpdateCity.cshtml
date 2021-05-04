@@ -1,0 +1,38 @@
+﻿@model EntityDataBases.Storage.Entity.City
+@{
+    Layout = "~/Views/Shared/AddOrUpdate.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UpdateCity</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Update", "City", FormMethod.Post))
+        {
+            <input id="CityId" name="CityId" type="hidden" value="@Model.Id" />
+            <div class="row">
+                <div class="col-25">
+                    <label>Город: </label>
+                </div>
+                <div class="col-75">
+                    <input id="Name" required type="text" name="Name" value="@Model.Name" />
+                </div>
+            </div><br />
+            <div class="row">
+                <input type="submit" value="Редактировать город" />
+            </div><br />
+        }
+        @using (Html.BeginForm("ShowCitys", "City", FormMethod.Get))
+        {
+            <div class="row">
+                <input type="submit" value="Отмена" />
+            </div>
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿@model EntityDataBases.Storage.Entity.OrdersParts
+@{
+    Layout = "~/Views/Shared/AddOrUpdate.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddPartInOrder</title>
+</head>
+<body>
+    @using (Html.BeginForm("Add", "Order", FormMethod.Post))
+    {
+        <input id="OrderId" name="OrderId" type="hidden" value="@ViewBag.OrderId" />
+        <div class="row">
+            <div class="col-25">
+                <label>Деталь: </label>
+            </div>
+            <div class="col-75">
+                <select required name="PartId">
+                    @foreach (var item in ViewBag.Parts)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Количество: </label>
+            </div>
+            <div class="col-75">
+                <input type="number" required min="1" id="Num" name="Num" /><br /><br />
+            </div>
+        </div><br />
+        <div class="row">
+            <input type="submit" value="Добавить деталь в заказ" />
+        </div><br />
+    }
+    @using (Html.BeginForm("ShowOrder", "Order", FormMethod.Get))
+    {
+        <input id="id" name="id" type="hidden" value="@ViewBag.OrderId" />
+        <div class="row">
+            <input type="submit" value="Отмена" />
+        </div>
+    }
+</body>
+</html>

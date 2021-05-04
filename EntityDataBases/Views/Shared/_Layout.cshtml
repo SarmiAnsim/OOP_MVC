@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+
+        html {
+            background: Gainsboro;
+            max-width: 100%;
+        }
+
+        body {
+            max-width: 100%;
+            margin: 0;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #empty {
+            height: 100px;
+        }
+
+        .ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+            position: -webkit-sticky; /* Safari */
+            position: sticky;
+            top: 0;
+        }
+
+        .li {
+            float: left;
+        }
+
+            .li a {
+                background-color: #333;
+                display: block;
+                color: Gainsboro;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                .li a:hover {
+                    background-color: #111;
+                }
+
+        .liactive {
+            background-color: DodgerBlue;
+        }
+
+            .liactive a {
+                background-color: DodgerBlue;
+                display: block;
+                color: Gainsboro;
+                text-align: left;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                .liactive a:hover {
+                    background-color: #111;
+                }
+
+        footer {
+            text-align: center;
+            position: fixed; /* Фиксированное положение */
+            left: 0;
+            bottom: 0; /* Левый нижний угол */
+            padding: 10px; /* Поля вокруг текста */
+            background: DodgerBlue; /* Цвет фона */
+            color: Gainsboro; /* Цвет текста */
+            width: 100%; /* Ширина слоя */
+        }
+
+        table {
+            margin-left: auto;
+            margin-right: auto;
+            border-collapse: collapse;
+            max-width: 80%;
+            width: 80%;
+            background-color: DodgerBlue;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        tr:nth-child(odd) {
+            background-color: LightGrey
+        }
+
+        th {
+            overflow: hidden;
+            background-color: DodgerBlue;
+            color: Gainsboro;
+        }
+
+        input[type=submit] {
+            background-color: RoyalBlue;
+            color: Gainsboro;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+            input[type=submit]:hover {
+                background-color: Blue;
+            }
+
+        a {
+            text-align: center;
+            background-color: DimGray;
+            padding: 5px 10px;
+            color: Gainsboro;
+            position: relative;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+            a:hover {
+                background-color: #333;
+            }
+    </style>
+    <script>
+
+    </script>
+</head>
+<body>
+    <ul class="ul" style="z-index: 10;">
+        <li class="liactive"><a class="active" href="/MainPage/Main/"> Главная </a></li>
+        <li class="li"><a href="/CarModel/ShowCarsModels/"> Модели автомобилей </a></li>
+        <li class="li"><a href="/Manufacturer/ShowManufacturers/"> Производители </a></li>
+        <li class="li"><a href="/City/ShowCitys/"> Города </a></li>
+        <li class="li"><a href="/Storage/ShowStorages/"> Склады </a></li>
+        <li class="li"><a href="/Order/ShowOrders/"> Заказы </a></li>
+        <li class="li"><a href="/Part/ShowParts/"> Детали </a></li>
+        <li class="li"><a href="/CategoryParts/ShowCategorysParts/"> Категории запчастей </a></li>
+    </ul>
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <div id="empty">&nbsp;</div>
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+</body>
+</html>

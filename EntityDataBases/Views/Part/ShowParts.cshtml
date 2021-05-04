@@ -1,0 +1,47 @@
+﻿@model IEnumerable<EntityDataBases.Storage.Entity.Part>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowParts</title>
+    <style type="text/css" id="main">
+    </style>
+</head>
+<body>
+    <div>
+        <table border="1">
+            <caption><h1><strong>Детали</strong></h1></caption>
+            <tr>
+                <th>Деталь:</th>
+                <th>Стоимость:</th>
+                <th>Описание:</th>
+                <th>Модель автомобиля:</th>
+                <th colspan="2"></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td align="center"><strong>@item.Name</strong></td>
+                    <td>@item.Cost</td>
+                    <td>@item.Description</td>
+                    <td>@(item.ManufacturerName + " " + item.CarModelName)</td>
+                    <td width="155px"><a href="/Part/UpdatePart/@item.Id">Редактировать</a></td>
+                    <td width="95px" ><a href="/Part/Delete/@item.Id">Удалить</a></td>
+                </tr>
+            }
+        </table>
+        <br /><br />
+        @using (Html.BeginForm("AddPart", "Part"))
+        {
+            <div>
+                <input type="submit" value="Добавить новую деталь" />
+            </div>
+        }
+    </div>
+</body>
+</html>

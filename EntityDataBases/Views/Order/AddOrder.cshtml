@@ -1,0 +1,64 @@
+﻿@model EntityDataBases.Managers.Orders.CreateOrUpdateOrderRequest
+@{
+    Layout = "~/Views/Shared/AddOrUpdate.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddOrder</title>
+</head>
+<body>
+    @using (Html.BeginForm("Create", "Order", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="col-25">
+                <label>Номер заказа: </label>
+            </div>
+            <div class="col-75">
+                <input type="number" required id="OrderNumber" name="OrderNumber" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Дата заказа: </label>
+            </div>
+            <div class="col-75">
+                <input type="datetime" required id="OrderTime" name="OrderTime" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Заказчик: </label>
+            </div>
+            <div class="col-75">
+                <input type="text" required id="Client" name="Client" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Склад: </label>
+            </div>
+            <div class="col-75">
+                <select required name="StorageId">
+                    @foreach (var item in ViewBag.Storages)
+                    {
+                        <option value="@item.Id">@item.StorageNumber</option>
+                    }
+                </select>
+            </div>
+        </div><br />
+        <div class="row">
+            <input type="submit" value="Добавить заказ" />
+        </div><br />
+    }
+    @using (Html.BeginForm("ShowOrders", "Order", FormMethod.Get))
+    {
+        <div class="row">
+            <input type="submit" value="Отмена" />
+        </div>
+    }
+</body>
+</html>

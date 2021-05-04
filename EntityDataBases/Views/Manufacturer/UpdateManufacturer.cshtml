@@ -1,0 +1,46 @@
+﻿@model EntityDataBases.Storage.Entity.Manufacturer
+@{
+    Layout = "~/Views/Shared/AddOrUpdate.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UpdateManufacturer</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Update", "Manufacturer", FormMethod.Post))
+        {
+            <input id="ManufacturerId" name="ManufacturerId" type="hidden" value="@Model.Id" />
+            <div class="row">
+                <div class="col-25">
+                    <label>Производитель: </label>
+                </div>
+                <div class="col-75">
+                    <input id="Name" required type="text" name="Name" value="@Model.Name" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label>Страна производителя: </label>
+                </div>
+                <div class="col-75">
+                    <input type="text" required id="Country" name="Country" value="@Model.Country" />
+                </div>
+            </div><br />
+            <div class="row">
+                <input type="submit" value="Редактировать производителя" />
+            </div><br />
+        }
+        @using (Html.BeginForm("ShowManufacturers", "Manufacturer", FormMethod.Get))
+        {
+            <div class="row">
+                <input type="submit" value="Отмена" />
+            </div>
+        }
+    </div>
+</body>
+</html>

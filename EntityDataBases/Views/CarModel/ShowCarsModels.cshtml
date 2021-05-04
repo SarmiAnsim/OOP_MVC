@@ -1,0 +1,65 @@
+﻿@model IEnumerable<EntityDataBases.Storage.Entity.CarModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowCarModel</title>
+    <style type="text/css" id="main">
+
+        input[type=search] {
+            width: 25%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+<body>
+    <div>
+        <table border="1">
+            @using (Html.BeginForm("Search", "CarModel", "Post"))
+            {
+                <caption>
+                    <h1><strong>Модели автомобилей</strong></h1>
+                    Поиск по году выпуска <input class="col-25" type="search" name="YearSearch" id="YearSearch" value="@ViewBag.YearSearch" width="300" />
+                    Поиск по производителю <input class="col-25" type="search" name="ManSearch" id="ManSearch" value="@ViewBag.ManSearch" width="300" />
+                    <input type="submit" value="Искать"/>
+                </caption>
+            }
+            <thead>
+                <tr>
+                    <th>Модель:</th>
+                    <th>Год выпуска:</th>
+                    <th>Производитель:</th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            @foreach (var item in Model.Where(g => (g.Year.ToString() == ViewBag.YearSearch || ViewBag.YearSearch == "") && (g.ManufacturerName == ViewBag.ManSearch || ViewBag.ManSearch == "")))
+            {
+                <tr>
+                    <td align="center"><strong>@item.Name</strong></td>
+                    <td>@item.Year</td>
+                    <td>@item.ManufacturerName</td>
+                    <td width="155px"><a href="/CarModel/UpdateCarModel/@item.Id">Редактировать</a></td>
+                    <td width="95px"><a href="/CarModel/Delete/@item.Id">Удалить</a></td>
+                </tr>
+            }
+        </table>
+        <br /><br />
+        @using (Html.BeginForm("AddCarModel", "CarModel"))
+        {
+            <div>
+                <input type="submit" value="Добавить новую модель" />
+            </div>
+        }
+    </div>
+</body>
+</html>

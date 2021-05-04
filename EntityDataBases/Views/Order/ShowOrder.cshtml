@@ -1,0 +1,85 @@
+﻿@model IEnumerable<(EntityDataBases.Storage.Entity.Part,int)>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowCarModel</title>
+    <style type="text/css" id="main">
+        .order {
+            background: -webkit-linear-gradient(top, LightBlue 0%,SkyBlue 100%);
+            width: auto;
+            color: black;
+        }
+
+        .change {
+            text-align: center;
+        }
+    </style>
+</head>
+<body >
+    <div>
+        <h1>Заказ</h1>
+        <table class="order">
+            <tr>
+                <th class="order">
+                    <label>Номер заказа: </label><strong>@ViewBag.Order.OrderNumber</strong><br />
+                    <label>Стоимость заказа: </label>@ViewBag.Order.Cost<br />
+                    <label>Дата заказа: </label>@ViewBag.Order.OrderTime<br />
+                    <label>Заказчик: </label>@ViewBag.Order.Client<br />
+                    <label>Склад: </label>@ViewBag.Order.StorageNumber<br />
+                    <label>Адресс склада: </label>@ViewBag.Order.StorageAddress<br /><br />
+                    <a href="/Order/UpdateOrder/@ViewBag.Order.Id">Редактировать</a><br /><br />
+                </th>
+            </tr>
+        </table>
+
+        @using (Html.BeginForm("ChangePNumber", "Order", "Post"))
+        {
+            <input id="OrderId" name="OrderId" type="hidden" value="@ViewBag.Order.Id" />
+            <input id="PartId" name="PartId" type="hidden" value="0" />
+            <input type="hidden" id="text" name="Num" value="0" />
+            <input type="hidden" name="scroll" value="">
+
+            <table border="1">
+                <caption><h2><strong>Детали</strong></h2></caption>
+                <tr>
+                    <th>Деталь:</th>
+                    <th>Стоимость:</th>
+                    <th>Описание:</th>
+                    <th>Модель автомобиля:</th>
+                    <th>Количество:</th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td align="center"><strong>@item.Item1.Name</strong></td>
+                        <td>@item.Item1.Cost</td>
+                        <td>@item.Item1.Description</td>
+                        <td>@(item.Item1.ManufacturerName + " " + item.Item1.CarModelName)</td>
+                        <td>@item.Item2</td>
+                        <td class="change">
+                            <input type="submit" value="+" onclick="document.getElementById('text').value = '1'; document.getElementById('PartId').value = '@item.Item1.Id';" />
+                            <input type="submit" value="-" onclick="document.getElementById('text').value = '-1'; document.getElementById('PartId').value = '@item.Item1.Id';" />
+                            <input type="submit" value="del" onclick="document.getElementById('text').value = -1*@item.Item2; document.getElementById('PartId').value = '@item.Item1.Id';" />
+                        </td>
+                    </tr>
+                }
+            </table>
+            <br /><br />
+        }
+        @using (Html.BeginForm("AddPartInOrder", "Order"))
+        {
+            <input id="OrderId" name="OrderId" type="hidden" value="@ViewBag.Order.Id" />
+            <div>
+                <input type="submit" value="Добавить деталь" />
+            </div>
+        }
+    </div>
+</body>
+</html>
